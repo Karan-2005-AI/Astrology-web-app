@@ -1,25 +1,47 @@
+import { Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
-import BirthForm from "./components/BirthForm";
+
+import Home from "./pages/Home";
+import Kundli from "./pages/Kundli";
+import Horoscope from "./pages/Horoscope";
+import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f0524] via-[#1a0938] to-black relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#050816] via-[#12082d] to-black text-white">
 
-      {/* Stars effect */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-20 w-2 h-2 bg-white rounded-full"></div>
-        <div className="absolute top-40 right-32 w-1 h-1 bg-white rounded-full"></div>
-        <div className="absolute bottom-32 left-1/3 w-2 h-2 bg-white rounded-full"></div>
-        <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-white rounded-full"></div>
-      </div>
+      <Navbar />
 
-      <div className="relative z-10">
-        <Navbar />
+      <Routes>
 
-        <main className="flex justify-center items-center min-h-[80vh] px-4">
-          <BirthForm />
-        </main>
-      </div>
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
+        <Route
+          path="/kundli"
+          element={<Kundli />}
+        />
+
+        <Route
+          path="/horoscope"
+          element={<Horoscope />}
+        />
+
+        <Route
+          path="/about"
+          element={<About />}
+        />
+
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
+
+      </Routes>
 
     </div>
   );
