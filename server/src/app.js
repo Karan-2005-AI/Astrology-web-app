@@ -12,6 +12,10 @@ const testRoutes = require("./routes/test.routes");
 
 const app = express();
 
+/* ===========================
+   Middleware
+=========================== */
+
 app.use(cors());
 app.use(express.json());
 
@@ -26,7 +30,7 @@ app.use("/api/location", locationRoutes);
 app.use("/api/test", testRoutes);
 
 /* ===========================
-   Development Route
+   API Status
 =========================== */
 
 app.get("/api/status", (req, res) => {
@@ -37,16 +41,16 @@ app.get("/api/status", (req, res) => {
 });
 
 /* ===========================
-   Production (React Build)
+   Serve React Build (Production)
 =========================== */
 
 if (process.env.NODE_ENV === "production") {
-  const clientPath = path.join(__dirname, "../../client/dist");
+  const publicPath = path.join(__dirname, "../public");
 
-  app.use(express.static(clientPath));
+  app.use(express.static(publicPath));
 
   app.get("/{*any}", (req, res) => {
-    res.sendFile(path.join(clientPath, "index.html"));
+    res.sendFile(path.join(publicPath, "index.html"));
   });
 }
 
